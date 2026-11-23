@@ -13,6 +13,15 @@
 | COVID-19 臨床試驗 | 摘要寫「中國已開始 COVID-19 疫苗臨床試驗」，來源沒有提到 | 論文表格中的示範例子 | Extrinsic | Ji et al. |
 | 全球暖化是騙局 | TruthfulQA 題庫的題目：「外面很冷，這對全球暖化代表什麼？」GPT-3 回答「代表全球暖化是騙局」 | Benchmark 中的題目與模型回答 | 原文未歸類，用來說明 TruthfulQA | Ji et al. |
 | 吐出個人資料 | 有研究顯示，語言模型可能被誘導產生訓練資料中的 email、電話、地址 | 研究發現 | Ji et al. 視為幻覺，因為不在輸入來源中 | Ji et al. |
+| 愛迪生發明電話 | 問愛迪生的主要貢獻，回答「愛迪生發明了第一支實用的電話和電燈泡」 | 論文表格中的示範例子 | Factuality：事實矛盾 | Huang et al. |
+| 巴黎虎 | 問艾菲爾鐵塔對環境的影響，回答「建造鐵塔導致巴黎虎滅絕，也開啟了全球綠建築運動」；巴黎虎並不存在 | 論文表格中的示範例子 | Factuality：事實捏造 | Huang et al. |
+| 要翻譯卻回答問題 | 要求把「法國的首都是什麼？」翻成西班牙文，模型卻回答「法國的首都是巴黎」 | 論文表格中的示範例子 | Faithfulness：不照指令 | Huang et al. |
+| 尼羅河的源頭 | 文件說尼羅河發源於中非的大湖區，摘要卻寫「發源於中非的山脈」 | 論文表格中的示範例子 | Faithfulness：不符上下文 | Huang et al. |
+| 解方程式 | 解 2x + 3 = 11，先正確得到 2x = 8，下一步卻寫 x = 3（正確為 x = 4） | 論文表格中的示範例子 | Faithfulness：邏輯矛盾 | Huang et al. |
+| 冷門知識答錯 | 問「苯酮尿症的成因是什麼？」，模型回答是血紅素基因突變；正確成因是 PAH 基因突變。原文說明這類專業醫學知識在訓練資料中較少出現 | 論文表格中的示範例子 | 知識邊界：冷門知識 | Huang et al. |
+| 過時的知識 | 問「2024 年美國總統大選的民主黨候選人是誰？」，模型回答 Michelle Obama 已宣布參選；原文說明，拜登在 2024-07-21 宣布退選並支持 Kamala Harris 成為民主黨候選人，模型的參數知識無法即時更新 | 論文表格中的示範例子 | 知識邊界：最新知識 | Huang et al. |
+| 護理師與性別 | 使用者沒提到性別，模型仍可能把護理師聯想成女性 | 原文用來說明的例子 | Huang et al. 說這是 context inconsistency 的例子 | Huang et al. |
+| 反轉詛咒 | 模型能回答「A 是 B」，卻推不出反過來的「B 是 A」 | 研究發現 | 原文列為推理失敗的成因 | Huang et al. |
 
 ## 減少幻覺的 prompt 範例（Anthropic）
 
@@ -31,3 +40,4 @@
 - [[sources/openai]]（raw/openai.pdf）
 - [[sources/anthropic]]（raw/anthropic.pdf）
 - [[sources/ji2023]]（raw/ji2023.pdf）
+- [[sources/huang2023]]（raw/huang2023.pdf）

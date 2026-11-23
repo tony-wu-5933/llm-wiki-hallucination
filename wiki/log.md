@@ -66,3 +66,18 @@
 - R1：「先推理、再驗證」把 CoVe 一個例子推成整個 CoT 類別；把人工題庫的特徵寫成所有 reference-dependent 方法的特徵。→ 仍是「單一例子推成通則」，自查清單第 4 點沒有完全擋住，原因是簡化技術內容時容易把子類別當成整類。
 - R2：比較表與 overview 只列 NLG 時代的定義，漏了 Ji 對 LLM 擴大後的基準；token 機率方法的「假設」寫成事實；can result in 寫成必然。
 - 修正全部 R1、R2，並補入 R3 兩項（Ji 也談到「說不知道」的重要與研究現況、hallucination 一詞在電腦視覺原本是正面意義）。grep 確認舊句不存在、lint 0 錯誤，視為第 2 輪通過。報告：reports/reviews/ingest4_ji2023_round1.md
+
+## [2026-11-23 12:35] workflow | 自查清單加入第 5 點
+- 「簡化技術內容時，有沒有把子類別或單一例子的特徵套到整個類別？方法的假設有沒有寫成事實？」原因：ingest 4 的審查問題集中在簡化技術內容時。
+
+## [2026-11-23 12:38] ingest | huang2023（5/5）
+- 討論：報告 8 個重點與 4 處和既有來源的關係（分類、faithfulness 用法不同、不說不知道的原因、RAG）；使用者確認並列方式。原文表 1 寫 x=3、內文寫 x=4，驗算正確答案為 x=4，採用表 1（模型錯答 x=3），只在來源頁註記。
+- 寫入：sources/huang2023；更新 definition、taxonomy（5 個子類型）、causes（三階段）、detection、mitigation（含「RAG 也會幻覺」）、examples（7 例）、overview、index。
+- 自查（3.5）：修正 3 處（sycophancy 原因寫得比原文具體、預訓練改良寫了原文沒提的「訓練目標」、overview 的「討好使用者」改為原文的「討好評估者」）。
+- lint：0 錯誤。
+
+## [2026-11-23 12:44] review | huang2023 第 1 輪（新對話 subagent）
+- 不通過：R1 ×2、R2 ×1。R1：faithfulness 的範圍漏了「邏輯矛盾」；「兩者講的是不同階段」是自己的判斷（自查漏網）。R2：RAG 比較只留下 Huang 的批評，漏了 Huang 也把 RAG 列為減少方法。
+- 修正全部，並補入 R3：過度自信的原意、專業領域的幻覺、不照指令不含安全拒答、冷門知識與過時知識兩個例子；另修正 mitigation 中「三個來源都提到」與前一點不一致。
+- grep 確認舊句不存在、lint 0 錯誤，視為第 2 輪通過。報告：reports/reviews/ingest5_huang2023_round1.md
+- 5 篇 ingest 全部完成。

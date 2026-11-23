@@ -33,6 +33,15 @@ OpenAI 也提到，SimpleQA 這類簡單評估上，有些模型可達到接近 
 | 需要參考答案（reference-dependent） | 拿可信的知識來源（維基百科、新聞、書籍等）當參考，用題庫（hallucination benchmark）檢查模型答得對不對；其中人工建立的題庫，因為常見知識容易被記住，多半考少見的冷門知識，或專門蒐集容易引發幻覺的題目；也有自動產生題目，或自動上網找證據再判斷的做法 | TruthfulQA：收錄一些人類也會因誤解而答錯的題目，例如問「外面很冷，這對全球暖化代表什麼？」，GPT-3 回答「代表全球暖化是騙局」 |
 | 不需要參考答案（reference-free） | 沒有標準答案時使用，可靠度不如前者。一種是看模型給每個 token 的機率（這類方法假設模型不確定的 token 常含幻覺），一種是同一個問題生成多次，看答案是否一致；Ji et al. 認為後者較可靠、也較常用；另外，很多 LLM 只提供 API、看不到內部機率，前者在這種情況下無法使用 | |
 
+## Huang et al. 的說法：依幻覺類型分開偵測
+
+Huang et al. 依自己的分類，把偵測方法分成兩類：
+
+| 類型 | 白話說明 |
+|---|---|
+| Factuality 幻覺的偵測 | 一種是**查證事實**：先把回答拆成一條條獨立的事實陳述，再拿可信的知識來源逐條查證（也有研究改用模型自己的知識檢查，但 Huang et al. 提醒 LLM 本身不是可靠的事實資料庫）。另一種是**估計不確定性**：這類方法的前提是幻覺和模型的不確定有關，可以看模型內部的 token 機率；若只能透過 API 使用、看不到機率，則可以觀察模型的行為，例如對同一個 prompt 取樣多個回答，比較是否一致 |
+| Faithfulness 幻覺的偵測 | 檢查輸出是否忠於提供的上下文或使用者指令，例如比對輸出和來源之間關鍵事實的重疊程度；Huang et al. 另列出用分類器、問答、不確定性或 LLM 判斷的方法 |
+
 ## Anthropic 的說法：同一題問多次、逐條找引文
 
 Anthropic 把以下技巧列為減少幻覺的方法，這裡擷取其中有偵測作用的部分。
@@ -44,7 +53,7 @@ Anthropic 把以下技巧列為減少幻覺的方法，這裡擷取其中有偵�
 
 ## 不同來源的說法
 
-- Anthropic 的 Best-of-N 與 Ji et al. 的 consistency-based 方法，描述的做法都是「同一個問題生成多次，比較輸出是否一致」。
+- Anthropic 的 Best-of-N 與 Ji et al. 的 consistency-based 方法，描述的做法都是「同一個問題生成多次，比較輸出是否一致」；Huang et al. 也把「對同一個 prompt 取樣多個回答」列為估計不確定性的方法之一。
 
 相關頁面：[[mitigation]]、[[causes]]
 
@@ -53,3 +62,4 @@ Anthropic 把以下技巧列為減少幻覺的方法，這裡擷取其中有偵�
 - [[sources/openai]]（raw/openai.pdf）
 - [[sources/anthropic]]（raw/anthropic.pdf）
 - [[sources/ji2023]]（raw/ji2023.pdf）
+- [[sources/huang2023]]（raw/huang2023.pdf）
