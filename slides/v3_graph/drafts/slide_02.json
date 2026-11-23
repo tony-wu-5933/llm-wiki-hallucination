@@ -1,0 +1,58 @@
+{
+ "type": "content",
+ "title": "幻覺是什麼？",
+ "core": {
+  "text": "IBM、OpenAI、Anthropic 對幻覺各有定義，並列呈現",
+  "cards": [
+   "d01",
+   "d02",
+   "d03"
+  ]
+ },
+ "blocks": [
+  {
+   "type": "columns",
+   "cols": [
+    {
+     "head": "IBM",
+     "items": [
+      {
+       "text": "AI 產生聽起來合理、但事實錯誤、不相關或完全捏造的輸出",
+       "cards": [
+        "d01"
+       ]
+      },
+      {
+       "text": "把假的事實、虛構的研究、不存在的網址當成事實講出來",
+       "cards": [
+        "d04"
+       ]
+      }
+     ]
+    },
+    {
+     "head": "OpenAI",
+     "items": [
+      {
+       "text": "模型自信地產生不實答案",
+       "cards": [
+        "d02"
+       ]
+      }
+     ]
+    },
+    {
+     "head": "Anthropic",
+     "items": [
+      {
+       "text": "產生與事實不符，或與提供的上下文不一致的文字",
+       "cards": [
+        "d03"
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

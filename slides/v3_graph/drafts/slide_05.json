@@ -1,0 +1,80 @@
+{
+ "type": "content",
+ "title": "幻覺有哪幾種？",
+ "core": {
+  "text": "不同來源用不同方式分類幻覺",
+  "cards": [
+   "t09"
+  ]
+ },
+ "blocks": [
+  {
+   "type": "columns",
+   "cols": [
+    {
+     "head": "IBM：3 種",
+     "items": [
+      {
+       "text": "事實型：說出違反真實世界的資訊",
+       "cards": [
+        "t01"
+       ]
+      },
+      {
+       "text": "脈絡型：沒照指定的資料回答",
+       "cards": [
+        "t02"
+       ]
+      },
+      {
+       "text": "一致性型：同一段對話前後矛盾",
+       "cards": [
+        "t03"
+       ]
+      }
+     ]
+    },
+    {
+     "head": "Ji et al.：2 種",
+     "items": [
+      {
+       "text": "Intrinsic：輸出和來源矛盾",
+       "cards": [
+        "t04"
+       ]
+      },
+      {
+       "text": "Extrinsic：輸出無法從來源驗證",
+       "cards": [
+        "t05"
+       ]
+      }
+     ]
+    },
+    {
+     "head": "Huang et al.：2 大類",
+     "items": [
+      {
+       "text": "Factuality：和真實世界事實不符",
+       "cards": [
+        "t06"
+       ]
+      },
+      {
+       "text": "Faithfulness：偏離使用者的輸入，或內容本身不一致",
+       "cards": [
+        "t07"
+       ]
+      },
+      {
+       "text": "在 Ji et al. 的基礎上為 LLM 重新設計",
+       "cards": [
+        "t08"
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

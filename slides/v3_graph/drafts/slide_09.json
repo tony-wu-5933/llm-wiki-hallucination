@@ -1,0 +1,75 @@
+{
+ "type": "content",
+ "title": "OpenAI 引用的數據",
+ "core": {
+  "text": "OpenAI 的解讀：o4-mini 準確率稍高，但錯誤率（也就是幻覺率）明顯較高",
+  "cards": [
+   "n04"
+  ]
+ },
+ "layout": "row",
+ "blocks": [
+  {
+   "type": "bar",
+   "title": "SimpleQA 評估（OpenAI 引用）",
+   "unit": "%",
+   "series": [
+    "gpt-5-thinking-mini",
+    "OpenAI o4-mini"
+   ],
+   "groups": [
+    {
+     "name": "棄答率",
+     "values": [
+      52,
+      1
+     ]
+    },
+    {
+     "name": "準確率",
+     "values": [
+      22,
+      24
+     ]
+    },
+    {
+     "name": "錯誤率",
+     "values": [
+      26,
+      75
+     ]
+    }
+   ],
+   "cards": [
+    "n01",
+    "n02",
+    "n03",
+    "n06"
+   ]
+  },
+  {
+   "type": "bullets",
+   "items": [
+    {
+     "text": "棄答率：不提供具體答案",
+     "cards": [
+      "n01"
+     ]
+    },
+    {
+     "text": "準確率越高越好，錯誤率越低越好",
+     "cards": [
+      "n02",
+      "n03"
+     ]
+    },
+    {
+     "text": "OpenAI：答錯比放棄不答更糟",
+     "cards": [
+      "n05"
+     ]
+    }
+   ]
+  }
+ ]
+}

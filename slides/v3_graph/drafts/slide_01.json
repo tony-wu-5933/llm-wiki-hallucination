@@ -1,0 +1,11 @@
+{
+ "type": "title",
+ "title": "LLM 幻覺是什麼？",
+ "subtitle": "當 AI 一本正經地說錯話：定義、例子、成因與因應（Graph 版：只用 Wiki 證據卡組成）",
+ "blocks": [
+  {
+   "type": "icon",
+   "name": "chat"
+  }
+ ]
+}

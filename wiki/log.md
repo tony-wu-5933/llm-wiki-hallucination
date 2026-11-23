@@ -92,3 +92,32 @@
 - 使用者看過階段一簡報的三點意見：每張的小結太像 AI、都是文字沒有圖、風格太嚴肅（這是給大家看的作業）。
 - 使用者決定：圖用 inline SVG 自己畫；聊天室風格；只在最後一張總結；出處用角落小標籤。
 - 把階段一的問題（審查 F1／F2）與使用者意見寫成 .agents/skills/slides-loop/SKILL.md；check_slides.py 改為讀 data-src、不要求每張小結；AGENTS.md 第 6 節同步修改。
+
+## [2026-11-23 13:15] slides | 階段二：Loop 版（補記）
+- 依 .agents/skills/slides-loop/SKILL.md 跑 3 輪，產出 slides/v2_loop/index.html（15 張）。
+- 第 1 輪：程式檢查 0 錯誤；審查 F1 1、F2 3、F4 7（round1_review.md）。第 1 輪 HTML 被第 2 輪覆寫，只留截圖與報告。
+- 第 2 輪：程式檢查 0 錯誤；審查 F1 0、F2 3、F4 7（round2_review.md）。
+- 第 3 輪：依第 2 輪報告修正 3 項 F2 後交件（停止條件：最多 3 輪），程式檢查 0 錯誤，未再跑第 4 次審查。F4 7 項未處理。
+
+## [2026-11-23 13:25] slides | 階段三：Graph 版——證據卡、覆蓋率、大綱
+- 新增 .agents/skills/slides-graph/SKILL.md（節點與連線、各節點完成標準）。
+- 證據卡：slides/v3_graph/cards.json 84 張（make_cards.py 產生）。check_cards.py：0 錯誤（cards_check.md）。
+- 覆蓋率關卡：每張內容頁 ≥ 2 張卡、5 個來源都有引用，0 錯誤（coverage.md）。
+- 大綱（outline.md，15 張）：使用者確認。
+
+## [2026-11-23 13:30] slides | 階段三：Graph 版——逐頁稿、組 HTML、渲染檢查
+- 逐頁稿 drafts/slide_01–15.json（make_drafts.py 產生），每段文字都標證據卡；render_deck.py 用固定模板組成 index.html。
+- 渲染檢查第 1 輪：3 個錯誤（S4 第 6 張「x = 4」後面接頁碼被誤認成「x = 46」；S6 第 6、9 張溢出）。只改這兩張的版面（4 個對話框排成一列、長條圖改左右排），第 2 輪 0 錯誤。
+
+## [2026-11-23 13:33] review | Graph 版逐頁忠實度審查第 1 輪（新對話 subagent）
+- 10 張通過、5 張退回（第 3、6、9、10、11 張）。F1 0、F2 6、F4 10（review_round1.md）。
+- F2：把「好幾件判例不存在」標成整串都錯；愛迪生例子漏標燈泡；OpenAI 的解讀沒標是誰說的；諂媚漏了「經過人類回饋訓練的模型」；影響頁的假訊息、隱私兩條漏了主詞與條件。
+- 只重寫這 5 張（同時處理這 5 張上的 F4），其他 10 張不動。渲染檢查 0 錯誤（render_check_round3.md）。
+
+## [2026-11-23 13:36] review | Graph 版逐頁忠實度審查第 2 輪
+- 只審退回的 5 張：全部通過，F1 0、F2 0、F4 3（review_round2.md）。第 1 輪 6 項 F2 都已解決。
+- 未處理的 F4 提醒：未退回頁面上的 F4（例如第 15 張「能不能避免」把 Anthropic 也列為「說法不同」，但第 14 張寫 Anthropic 沒有討論；Ji et al.、SimpleQA 等名詞沒有說明）依流程不改動，留待人工決定。
+
+## [2026-11-23 13:45] review | Graph 版第 15 張（交件前人工確認）
+- 使用者決定修正第 1 輪 F4 指出的第 15 張：「能不能避免：IBM、OpenAI、Anthropic 說法不同」與第 14 張「Anthropic 沒有討論」不一致。只改這一條，其他張不動。
+- 審查第 3 輪（只審第 15 張）：通過，F1 0、F2 0、F4 1（review_round3.md）。依該 F4 建議補上「只說它的技巧無法完全消除幻覺」（卡片 d11）。渲染檢查 0 錯誤（render_check_round4.md）。
