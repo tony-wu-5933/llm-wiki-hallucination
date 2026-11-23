@@ -20,13 +20,40 @@
 | 更新主流評估，而不是只加幾個新測試 | OpenAI 認為，單是添加幾個考慮不確定情況的測試還不夠，需要更新廣泛使用、以準確率為準的評估方法；如果主要成績表繼續獎勵幸運猜中，模型就會繼續學著猜 |
 | 允許放棄不答 | （出自原文「為考試而教」一節）OpenAI 的模型規格規定，表達不確定或要求釐清問題，比自信地提供錯誤資訊來得好 |
 
+## Anthropic 的方法：使用 Claude 時的技巧
+
+Anthropic 的指南寫給使用 Claude 開發應用的人，以下是它列出的技巧。
+
+### 基本技巧
+
+| 技巧 | 說明 |
+|---|---|
+| 允許說「我不知道」 | 明確允許 Claude 承認不確定。Anthropic 表示，這個技巧可以大幅減少錯誤資訊 |
+| 用原文引文當依據 | 處理長文件（超過 20k tokens）時，先要求 Claude 逐字摘錄原文，再執行任務，讓回答建立在實際的文字上，減少幻覺 |
+| 用引用驗證 | 要求 Claude 為每個主張附上引文與來源，讓回答可以被檢查；也可以在它寫完後，要它為每個主張找支持的引文，找不到就必須撤回 |
+
+prompt 範例見 [[examples]]。
+
+### 進階技巧
+
+| 技巧 | 說明 |
+|---|---|
+| Chain-of-thought verification | 開啟 thinking（摘要顯示），答案看起來不對時，檢查 thinking 區塊中摘要後的推理，可能發現錯誤的邏輯或假設 |
+| Best-of-N verification | 同一個 prompt 跑多次並比較輸出，不一致可能代表幻覺（見 [[detection]]） |
+| Iterative refinement | 把 Claude 的輸出當成下一個 prompt 的輸入，要它驗證或延伸先前的說法，可以抓出並修正不一致 |
+| External knowledge restriction | 明確指示 Claude 只能使用提供的文件，不能用它的一般知識 |
+
+Anthropic 也提醒：這些技巧能大幅減少幻覺，但無法完全消除；關鍵資訊一定要驗證，特別是高風險決策。
+
 ## 不同來源的說法
 
-- IBM 的方法多從企業與開發者的角度出發（訓練資料、fine-tune、RAG、prompt、人工審核、治理）；OpenAI 則把重點放在模型的訓練與評估方式。
-- IBM 認為幻覺只能減少、無法完全消除；OpenAI 認為模型可以在不確定時放棄不答，因此幻覺並非不可避免（見 [[definition]]、[[myths]]）。
+- IBM 的方法多從企業與開發者的角度出發（訓練資料、fine-tune、RAG、prompt、人工審核、治理）；OpenAI 則把重點放在模型的訓練與評估方式；Anthropic 列出的是使用 Claude 時的技巧。
+- 「允許說不知道」三個來源都提到：IBM 的防護規則「不確定就說不知道」、OpenAI 的模型規格（表達不確定比自信答錯好）、Anthropic 的基本技巧。
+- IBM 認為幻覺只能減少、無法完全消除；OpenAI 認為模型可以在不確定時放棄不答，因此幻覺並非不可避免（見 [[definition]]、[[myths]]）；Anthropic 只說它介紹的技巧無法完全消除幻覺。
 
 相關頁面：[[causes]]、[[detection]]
 
 ## 來源
 - [[sources/ibm]]（raw/ibm.pdf）
 - [[sources/openai]]（raw/openai.pdf）
+- [[sources/anthropic]]（raw/anthropic.pdf）

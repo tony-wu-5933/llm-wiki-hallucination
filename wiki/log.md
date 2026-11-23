@@ -42,3 +42,15 @@
 - R1：「介紹同名研究論文」原文沒說是同名；「準確率相近的模型，錯誤率可能差很多」是把兩個模型的數據自行推成通則。→ 新的錯誤類型：從單一例子歸納成一般結論。
 - 修正 R1 與次要提醒（「可以放棄不答」改為「放棄不答不會吃虧」），並補入 R3：寵物生日類比的前提、overview 補預訓練成因、mitigation 標題與模型規格出處。
 - 以 grep 確認舊句已不存在、lint 0 錯誤，視為第 2 輪通過。報告：reports/reviews/ingest2_openai_round1.md
+
+## [2026-11-23 12:16] ingest | anthropic（3/5）
+- 討論：報告 6 個重點；Anthropic 的「技巧無法完全消除」加入 definition 並列表，但照原文限定為「這些技巧」；使用者同意自查清單加第 4 點。
+- 寫入：sources/anthropic；更新 definition、mitigation（新增 Anthropic 技巧）、detection（Best-of-N）、examples（3 個示範用 prompt）、overview、index。
+- 自查（3.5）：刪除自己加的判斷「一般使用者也能照做」「都是在 prompt 中下指示」（Best-of-N、CoT 不只是 prompt），改掉 overview 的「使用者寫 prompt 時就能用」。
+- lint：0 錯誤。
+
+## [2026-11-23 12:18] review | anthropic 第 1 輪（新對話 subagent）
+- 不通過，但只有 R2 ×1、R1 ×0。問題：overview 新增第三個來源時，原句「兩個來源看法不同」沒有跟著改，且讓 Anthropic 看似和 IBM 同立場。→ 新的錯誤類型：新增來源時，舊句子沒同步更新。
+- 修正 R2，並補 R3：mitigation 的比較段補上 Anthropic、CoT 改為「thinking 區塊中摘要後的推理」、detection 註明是從減少技巧中擷取。
+- grep 確認舊句不存在、lint 0 錯誤，視為第 2 輪通過。報告：reports/reviews/ingest3_anthropic_round1.md
+- 備註：使用者把專案資料夾從桌面移到「上課用/生成式ai/」，之後一律在新位置作業。

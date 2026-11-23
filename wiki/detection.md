@@ -21,8 +21,18 @@ OpenAI 的解讀：o4-mini 的準確率稍微超前，但錯誤率（也就是�
 
 OpenAI 也提到，SimpleQA 這類簡單評估上，有些模型可達到接近 100% 的準確率；但在較複雜的評估與實際使用中，準確率會受限在 100% 之下，因為有些問題的答案因資訊無法取得、小型模型推理能力有限或需要釐清等原因而無法確定。
 
+## Anthropic 的說法：同一題問多次、逐條找引文
+
+Anthropic 把以下技巧列為減少幻覺的方法，這裡擷取其中有偵測作用的部分。
+
+- **Best-of-N verification**：用同一個 prompt 讓 Claude 跑多次並比較輸出，輸出之間不一致可能代表有幻覺。
+- **用引用驗證**：寫完後要它為每個主張找支持的原文引文，找不到就撤回該主張（見 [[mitigation]]）。
+- **Chain-of-thought verification**：檢查推理過程，可能發現錯誤的邏輯或假設。
+- **Iterative refinement**：要它驗證先前的說法，可以抓出並修正不一致。
+
 相關頁面：[[mitigation]]、[[causes]]
 
 ## 來源
 - [[sources/ibm]]（raw/ibm.pdf）
 - [[sources/openai]]（raw/openai.pdf）
+- [[sources/anthropic]]（raw/anthropic.pdf）
