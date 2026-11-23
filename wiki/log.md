@@ -27,3 +27,18 @@
 - 不通過：上輪 10 條全部已修正；新發現 R2 ×2（sources/ibm 漏改 in many ways、mitigation 的 prompt 一句去掉 can）。
 - 修正後以 grep 確認兩處文字已替換、舊用語不再出現，lint 0 錯誤，視為第 3 輪通過。報告：reports/reviews/ingest1_ibm_round2.md
 - 觀察：寫作節點最常犯的錯是「去掉原文的保留語氣」與「把示範句當真實事件」，下一篇起寫入時先自查這兩點。
+
+## [2026-11-23 12:08] workflow | AGENTS.md 新增 ingest 步驟 3.5「寫入者自查」
+- 原因：ingest 1 的 12 個審查問題幾乎都是「去掉保留語氣」「把假設情境當真實事件」，卻要到最後的審查節點才被抓到（繞了兩次大圈）。把這兩類檢查往前移到寫入之後、lint 之前。
+
+## [2026-11-23 12:10] ingest | openai（2/5）
+- 討論：報告 7 個重點，以及與 IBM 的兩處矛盾（能不能避免、成因重點）；使用者同意新增 myths 頁與自查步驟。
+- 寫入：sources/openai、myths（新）；更新 definition（新增「能不能避免」並列表）、causes、examples、detection（SimpleQA）、mitigation、overview、index。
+- 自查（3.5）：發現 overview 寫了「IBM 和 OpenAI 的定義相近」，屬於自己的判斷，改成分別陳述兩方定義。
+- lint：0 錯誤。
+
+## [2026-11-23 12:14] review | openai 第 1 輪（新對話 subagent）
+- 不通過，但只有 R1 ×2、R2 ×0（ingest 1 第 1 輪是 R1 ×3、R2 ×7）。
+- R1：「介紹同名研究論文」原文沒說是同名；「準確率相近的模型，錯誤率可能差很多」是把兩個模型的數據自行推成通則。→ 新的錯誤類型：從單一例子歸納成一般結論。
+- 修正 R1 與次要提醒（「可以放棄不答」改為「放棄不答不會吃虧」），並補入 R3：寵物生日類比的前提、overview 補預訓練成因、mitigation 標題與模型規格出處。
+- 以 grep 確認舊句已不存在、lint 0 錯誤，視為第 2 輪通過。報告：reports/reviews/ingest2_openai_round1.md
