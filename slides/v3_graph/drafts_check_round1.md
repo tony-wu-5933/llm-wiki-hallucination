@@ -1,0 +1,50 @@
+# 逐頁稿程式檢查
+
+- 文字單位：86
+- 錯誤：44
+
+## 錯誤
+- D3 slide_02 core：漏了卡片 d01 必須保留的「聽起來合理」
+- D3 slide_02 core：漏了卡片 d02 必須保留的「自信地」
+- D3 slide_02 core：漏了卡片 d03 必須保留的「有時」
+- D3 slide_02 core：漏了卡片 d03 必須保留的「可能」
+- D3 slide_02 block1「Anthropic」第1項：漏了卡片 d03 必須保留的「有時」
+- D3 slide_02 block1「Anthropic」第1項：漏了卡片 d03 必須保留的「可能」
+- D3 slide_03 core：漏了卡片 e01 必須保留的「2023」
+- D3 slide_03 core：漏了卡片 e01 必須保留的「律師」
+- D3 slide_03 core：漏了卡片 e03 必須保留的「2013」
+- D3 slide_03 core：漏了卡片 e03 必須保留的「Reddit」
+- D3 slide_03 block1：漏了卡片 e01 必須保留的「律師」
+- D3 slide_04 block2：漏了卡片 d12 必須保留的「可能」
+- D3 slide_06 core：漏了卡片 x01 必須保留的「愛迪生」
+- D3 slide_06 core：漏了卡片 x03 必須保留的「巴黎虎並不存在」
+- D3 slide_10 core：漏了卡片 c15 必須保留的「IBM」
+- D3 slide_10 core：漏了卡片 c14 必須保留的「Ji et al.」
+- D3 slide_10 core：漏了卡片 c14 必須保留的「有研究發現」
+- D3 slide_10 core：漏了卡片 c10 必須保留的「Huang et al.」
+- D3 slide_10 core：漏了卡片 c10 必須保留的「知識邊界」
+- D3 slide_10 block1「Ji et al.」第1項：漏了卡片 c14 必須保留的「有研究發現」
+- D3 slide_11 block1 第1步：漏了卡片 i05 必須保留的「前提是錯」
+- D3 slide_11 block1 第2步：漏了卡片 i05 必須保留的「前提是錯」
+- D3 slide_11 block1 第3步：漏了卡片 i05 必須保留的「前提是錯」
+- D3 slide_12 core：漏了卡片 v01 必須保留的「IBM」
+- D3 slide_12 core：漏了卡片 v02 必須保留的「Anthropic」
+- D3 slide_12 core：漏了卡片 v02 必須保留的「可能」
+- D3 slide_13 block1「IBM」第1項：漏了卡片 m01 必須保留的「要求」
+- D3 slide_13 block1「Anthropic」第1項：漏了卡片 m06 必須保留的「大幅減少」
+- D3 slide_14 core：漏了卡片 d10 必須保留的「IBM」
+- D3 slide_14 core：漏了卡片 d10 必須保留的「在很多方面」
+- D3 slide_14 core：漏了卡片 d10 必須保留的「無法完全消除」
+- D3 slide_14 core：漏了卡片 a01 必須保留的「OpenAI」
+- D3 slide_14 core：漏了卡片 a01 必須保留的「放棄不答」
+- D3 slide_15 block1 第5項：漏了卡片 v01 必須保留的「IBM」
+- D3 slide_15 block1 第5項：漏了卡片 v02 必須保留的「Anthropic」
+- D3 slide_15 block1 第5項：漏了卡片 v02 必須保留的「可能」
+- D3 slide_15 block1 第5項：漏了卡片 m01 必須保留的「IBM」
+- D3 slide_15 block1 第5項：漏了卡片 m01 必須保留的「要求」
+- D3 slide_15 block1 第5項：漏了卡片 m02 必須保留的「IBM」
+- D3 slide_15 block1 第5項：漏了卡片 m02 必須保留的「可能」
+- D3 slide_15 block1 第5項：漏了卡片 m06 必須保留的「Anthropic」
+- D3 slide_15 block1 第5項：漏了卡片 m06 必須保留的「大幅減少」
+- D3 slide_15 block1 第6項：漏了卡片 d10 必須保留的「在很多方面」
+- D3 slide_15 block1 第6項：漏了卡片 a01 必須保留的「放棄不答」

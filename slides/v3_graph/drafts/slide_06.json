@@ -2,10 +2,9 @@
  "type": "content",
  "title": "Huang et al. 的示範例子",
  "core": {
-  "text": "以下是論文表格中的示範例子，不是真實事件",
+  "text": "以下是 Huang et al. 論文表格中的示範例子，不是真實事件",
   "cards": [
-   "x01",
-   "x03"
+   "x10"
   ]
  },
  "blocks": [

@@ -121,3 +121,29 @@
 ## [2026-11-23 13:45] review | Graph 版第 15 張（交件前人工確認）
 - 使用者決定修正第 1 輪 F4 指出的第 15 張：「能不能避免：IBM、OpenAI、Anthropic 說法不同」與第 14 張「Anthropic 沒有討論」不一致。只改這一條，其他張不動。
 - 審查第 3 輪（只審第 15 張）：通過，F1 0、F2 0、F4 1（review_round3.md）。依該 F4 建議補上「只說它的技巧無法完全消除幻覺」（卡片 d11）。渲染檢查 0 錯誤（render_check_round4.md）。
+
+## [2026-11-23 14:09] workflow | 使用者修改 graph 設計
+- 使用者決定：人工確認點維持兩個（大綱、交件前）；證據卡加一欄「必須保留的條件」（keep），並重跑一次 graph；流程圖用「直式＋顏色分角色」畫法；舊的 graph 成品換成重跑的結果。
+- 原因：上一次 graph 試跑（13:25–13:45 的紀錄）引文都對得上，審查仍抓到 6 個 F2，全部是改寫成投影片文字時省略主詞、條件或保留語氣。
+- 新增／修改：scripts/check_cards.py 加 K5（plain 包含 keep）、K6（quote 的保留語氣要列進 keep）；新增 scripts/check_drafts.py（逐頁稿保留 keep、例子標籤一致）與 scripts/check_coverage.py；.agents/skills/slides-graph/SKILL.md 改為 11 個節點；流程圖 flow/slides_graph.svg、flow/wiki_loop.svg（flow/make_flow.py 產生）。
+
+## [2026-11-23 14:12] slides | Graph 重跑——證據卡、覆蓋率、大綱
+- 證據卡第 1 輪：3 個錯誤（K6：d12、c06、m02 的 quote 有「可能」卻沒列進 keep；d12 的 plain 漏了「也更可能造成傷害」）。修正後第 2 輪 0（cards_check_round1–2.md）。
+- 覆蓋率關卡：0 錯誤（coverage.md）。
+- 大綱：使用者確認（15 張，結構同前）。
+
+## [2026-11-23 14:14] slides | Graph 重跑——逐頁稿程式檢查
+- check_drafts.py 第 1 輪：44 個錯誤（drafts_check_round1.md）。41 個是真的漏了 keep：例如第 2 張 Anthropic 定義漏了「有時」「可能」、第 4 張漏了「也更可能造成傷害」、第 13 張 RAG 漏了「要求」、第 10 張漏了「有研究發現」，以及 6 句核心重點引用多張卡卻沒保留各卡的條件。3 個是誤報：流程圖被拆成一步一步檢查，改成整張流程圖算一個單位。
+- 修正：新增 4 張卡（d13、x10、c17、a04）讓核心重點有對應的卡；改寫 6 句核心重點（第 2、3、6、10、12、14 張），投影片數量、順序、主題不變，outline.md 已註記。第 2 輪 0 錯誤（drafts_check_round2.md）。
+- 註：撰寫者在寫稿前看過上一次試跑的審查報告。
+
+## [2026-11-23 14:16] review | Graph 重跑——逐頁審查第 1 輪（新對話 subagent，與上次試跑的審查者不同）
+- 15 張：通過 11、退回 4（第 8、13、14、15 張）。F1 0、F2 6、F4 11（review_round1.md）。
+- F2：第 8 張把生日猜測「9 月 10 日」標紅成錯誤、兩條選擇題類比漏了前提「只依準確率評分時」；第 13 張「多從」的「多」被拿掉；第 14、15 張漏了 OpenAI 的補充「幻覺仍是根深蒂固的一大問題」；第 15 張「各來源不同」引用的卡片不對。
+- 只重寫這 4 張，新增卡片 c18、a05。證據卡檢查 0（cards_check_round3.md）、逐頁稿檢查 0（drafts_check_round3.md）、渲染檢查 0（render_check_round2.md）。
+
+## [2026-11-23 14:18] review | Graph 重跑——逐頁審查第 2、3 輪
+- 第 2 輪只審 4 張：通過 3、退回 1。第 1 輪的 6 項 F2 都已解決；第 8 張新加的「只依準確率評分」引用的卡片不支持（F2 1）（review_round2.md）。
+- 改為引用 c18、c08。逐頁稿檢查第 4 輪抓到加了 c18 後漏了「OpenAI」，第 5 輪 0（drafts_check_round4–5.md）。
+- 第 3 輪只審第 8 張：通過（review_round3.md）。15 張全部 F1 0、F2 0。渲染檢查 0（render_check_round3.md）。
+- 未處理的 F4 提醒（只提醒、依流程不改未退回的頁）：封面副標題括號、RAG／Extrinsic／gold-label 等術語沒有白話說明、第 6 張 4 個對話框偏擠等，見 review_round1.md。待交件前確認時由使用者決定。

@@ -5,13 +5,17 @@
 
 證據卡格式（JSON list）：
   {"id": "c01", "page": "causes", "quote": "<從該 wiki 頁逐字摘錄的句子>",
-   "source": "IBM", "kind": "fact|opinion|example-real|example-demo|example-hypo", "plain": "<給大學生的白話說法>"}
+   "source": "IBM", "kind": "fact|opinion|example-real|example-demo|example-hypo", "plain": "<給大學生的白話說法>",
+   "keep": ["<必須保留的條件：主詞、限定語、保留語氣…>"]}
 
 檢查：
 - K1 id 不重複
 - K2 page 存在於 wiki/
 - K3 quote 必須能在該頁「逐字」找到（忽略 markdown 符號與空白差異）
 - K4 kind 必須是規定的值；source 不可空白
+- K5 keep（必須保留的條件）必須是字串清單，plain 必須包含每一個 keep
+- K6 quote 裡有保留語氣（可能、通常、有時、常常、在很多方面），keep 也必須列出它
+（K5、K6 於 2026-11-23 依 graph 第 1 次執行的反思新增）
 有錯誤時 exit code = 1。
 """
 import argparse
@@ -20,6 +24,7 @@ import re
 import sys
 from pathlib import Path
 
+HEDGES = ["可能", "通常", "有時", "常常", "在很多方面"]
 KINDS = {"fact", "opinion", "example-real", "example-demo", "example-hypo"}
 
 
@@ -54,6 +59,16 @@ def main():
             errors.append(f"K4 {cid} 的 kind 不合法：{c.get('kind')}")
         if not c.get("source"):
             errors.append(f"K4 {cid} 沒有 source")
+        keep = c.get("keep")
+        if not isinstance(keep, list):
+            errors.append(f"K5 {cid} 沒有 keep 清單")
+            keep = []
+        for k in keep:
+            if norm(k) not in norm(c.get("plain", "")):
+                errors.append(f"K5 {cid} 的 plain 漏了必須保留的條件「{k}」")
+        for h in HEDGES:
+            if h in c.get("quote", "") and h not in keep:
+                errors.append(f"K6 {cid} 的 quote 有保留語氣「{h}」，keep 沒有列出")
     out = ["# 證據卡檢查", "", f"- 卡片數：{len(cards)}", f"- 錯誤：{len(errors)}", "", "## 錯誤"] + ([f"- {e}" for e in errors] or ["- 無"])
     text = "\n".join(out) + "\n"
     if a.report:

@@ -2,7 +2,7 @@
  "type": "content",
  "title": "怎麼減少幻覺？",
  "core": {
-  "text": "IBM 從企業與開發者角度；OpenAI 著重訓練與評估方式；Anthropic 是使用 Claude 時的技巧",
+  "text": "IBM 多從企業與開發者角度；OpenAI 著重訓練與評估方式；Anthropic 是使用 Claude 時的技巧",
   "cards": [
    "m11"
   ]
@@ -15,7 +15,7 @@
      "head": "IBM",
      "items": [
       {
-       "text": "RAG：接上精選的知識庫，只用知識庫的內容回答",
+       "text": "RAG：接上精選的知識庫，要求它只用知識庫的內容回答",
        "cards": [
         "m01"
        ]
@@ -55,7 +55,7 @@
      "head": "Anthropic",
      "items": [
       {
-       "text": "允許說「我不知道」",
+       "text": "允許說「我不知道」，可以大幅減少錯誤資訊",
        "cards": [
         "m06"
        ]
