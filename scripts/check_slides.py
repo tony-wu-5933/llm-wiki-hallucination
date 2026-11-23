@@ -5,15 +5,16 @@
 
 簡報格式約定（見 .agents/skills/slides-loop/SKILL.md）：
 - 每張投影片是 <section class="slide">；封面加 data-type="title"（不檢查出處與結構）。
-- 每張內容投影片要有 class="core"（核心重點）與 class="summary"（小結）。
-- 每個重點（.core、li、.summary）都要有 [wiki:slug] 標記，slug 必須是 wiki/ 中存在的頁面。
+- 每張內容投影片要有 class="core"（核心重點）；不放每張的小結，整份最後一張用 data-type="summary" 當總結。
+- 每個重點元素（.core、li、.point、.bubble）都要用 data-src="slug1,slug2" 標明出處，slug 必須是 wiki/ 中存在的頁面
+  （也接受文字中的 [wiki:slug]）。畫面上只在角落顯示小標籤。
 
 檢查項目：
 - S1 張數 8–15
-- S2 每個重點都有 [wiki:slug]
-- S3 [wiki:slug] 指向存在的頁面
+- S2 每個重點都有出處（data-src 或 [wiki:slug]）
+- S3 出處指向存在的 wiki 頁面
 - S4 投影片中的數字（百分比、年份、x=數字等）在所引用的 wiki 頁面中找得到
-- S5 每張內容投影片有「核心重點」與「小結」
+- S5 每張內容投影片有「核心重點」；最後一張是總結（data-type="summary"）
 - S6 渲染檢查：1280×720 下每張投影片沒有內容溢出（需要 playwright）
 有錯誤時 exit code = 1。
 """
@@ -52,9 +53,10 @@ class DeckParser(HTMLParser):
             self.cur = {"type": a.get("data-type", ""), "text": "", "points": [], "core": None, "summary": None}
             self.slides.append(self.cur)
         buf = None
-        if self.cur is not None and (tag in self.POINT_TAGS or "core" in classes or "summary" in classes):
-            kind = "core" if "core" in classes else "summary" if "summary" in classes else "point"
-            buf = {"kind": kind, "text": ""}
+        if self.cur is not None and (tag in self.POINT_TAGS or {"core", "point", "bubble"} & set(classes)):
+            kind = "core" if "core" in classes else "point"
+            src = [x.strip() for x in (a.get("data-src") or "").split(",") if x.strip()]
+            buf = {"kind": kind, "text": "", "src": src}
         self.stack.append((tag, buf))
 
     def handle_endtag(self, tag):
@@ -64,9 +66,7 @@ class DeckParser(HTMLParser):
                 txt = re.sub(r"\s+", " ", buf["text"]).strip()
                 if buf["kind"] == "core":
                     self.cur["core"] = txt
-                elif buf["kind"] == "summary":
-                    self.cur["summary"] = txt
-                self.cur["points"].append((buf["kind"], txt))
+                self.cur["points"].append((buf["kind"], txt, buf["src"]))
             if t == "section" and self.cur is not None and t == tag:
                 self.cur = None
             if t == tag:
@@ -143,24 +143,24 @@ def main():
     slides = parser.slides
     errors = []
 
+    if slides and slides[-1]["type"] != "summary":
+        errors.append("S5 最後一張不是總結（data-type=\"summary\"）")
     if not (8 <= len(slides) <= 15):
         errors.append(f"S1 張數為 {len(slides)}，應為 8–15 張（找不到 section.slide 時為 0）")
 
     for i, s in enumerate(slides, 1):
         if s["type"] == "title":
             continue
-        if not s["core"]:
+        if s["type"] != "summary" and not s["core"]:
             errors.append(f"S5 第 {i} 張缺少「核心重點」（.core）")
-        if not s["summary"]:
-            errors.append(f"S5 第 {i} 張缺少「小結」（.summary）")
         cited = set()
-        for kind, txt in s["points"]:
-            cs = CITE_RE.findall(txt)
+        for kind, txt, src in s["points"]:
+            cs = list(src) + CITE_RE.findall(txt)
             if not cs:
-                errors.append(f"S2 第 {i} 張有重點沒有 [wiki:slug]：「{txt[:40]}」")
+                errors.append(f"S2 第 {i} 張有重點沒有出處：「{txt[:40]}」")
             for c in cs:
                 if c not in pages:
-                    errors.append(f"S3 第 {i} 張引用了不存在的頁面 [wiki:{c}]")
+                    errors.append(f"S3 第 {i} 張引用了不存在的頁面「{c}」")
                 else:
                     cited.add(c)
         body = CITE_RE.sub("", s["text"])
