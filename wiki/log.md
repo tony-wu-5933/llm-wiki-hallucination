@@ -54,3 +54,15 @@
 - 修正 R2，並補 R3：mitigation 的比較段補上 Anthropic、CoT 改為「thinking 區塊中摘要後的推理」、detection 註明是從減少技巧中擷取。
 - grep 確認舊句不存在、lint 0 錯誤，視為第 2 輪通過。報告：reports/reviews/ingest3_anthropic_round1.md
 - 備註：使用者把專案資料夾從桌面移到「上課用/生成式ai/」，之後一律在新位置作業。
+
+## [2026-11-23 12:24] ingest | ji2023（4/5）
+- 討論：只取第 1–5、13 節；技術方法只寫類別與白話摘要（使用者決定：以好懂為主）。報告與 IBM 在「定義基準」與「分類」的兩處差異。
+- 寫入：sources/ji2023；更新 definition（定義、名詞釐清、定義基準並列表）、taxonomy（intrinsic／extrinsic 並列）、causes、impact、detection、mitigation、examples、overview、index。
+- 自查（3.5）：刪除 4 處自己的判斷或比較（替 IBM 分類下「錯在哪裡」的依據、「兩者方向相同」、把 gold-label／SimpleQA 歸入 Ji 的類別、把 API 限制寫成「較可靠」的原因）；overview 補回原文定義中的「無意義」。
+- lint：0 錯誤。
+
+## [2026-11-23 12:30] review | ji2023 第 1 輪（新對話 subagent）
+- 不通過：R1 ×2、R2 ×3；三個數字（62%、25%、41%→21%）與適用範圍都正確。
+- R1：「先推理、再驗證」把 CoVe 一個例子推成整個 CoT 類別；把人工題庫的特徵寫成所有 reference-dependent 方法的特徵。→ 仍是「單一例子推成通則」，自查清單第 4 點沒有完全擋住，原因是簡化技術內容時容易把子類別當成整類。
+- R2：比較表與 overview 只列 NLG 時代的定義，漏了 Ji 對 LLM 擴大後的基準；token 機率方法的「假設」寫成事實；can result in 寫成必然。
+- 修正全部 R1、R2，並補入 R3 兩項（Ji 也談到「說不知道」的重要與研究現況、hallucination 一詞在電腦視覺原本是正面意義）。grep 確認舊句不存在、lint 0 錯誤，視為第 2 輪通過。報告：reports/reviews/ingest4_ji2023_round1.md
