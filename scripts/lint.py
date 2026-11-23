@@ -7,12 +7,14 @@
 import re
 import sys
 from datetime import datetime
+from zoneinfo import ZoneInfo
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 WIKI = ROOT / "wiki"
 REPORT = ROOT / "reports" / "lint_latest.md"
 SPECIAL = {"index", "log"}
+CODE_RE = re.compile(r"```.*?```|`[^`\n]*`", re.S)
 LINK_RE = re.compile(r"\[\[([^\]|#]+)(?:[|#][^\]]*)?\]\]")
 RAW_RE = re.compile(r"raw/[\w.\-]+\.pdf")
 
@@ -22,7 +24,8 @@ def slug_of(p: Path) -> str:
 
 
 def main() -> int:
-    pages = {slug_of(p): p.read_text(encoding="utf-8") for p in sorted(WIKI.rglob("*.md"))}
+    # 去掉程式碼區塊與行內程式碼，避免把格式範例當成連結
+    pages = {slug_of(p): CODE_RE.sub("", p.read_text(encoding="utf-8")) for p in sorted(WIKI.rglob("*.md"))}
     errors, warns = [], []
     # 連結可寫完整 slug（sources/ibm）或只寫檔名（ibm）
     by_name = {}
@@ -92,7 +95,7 @@ def main() -> int:
             if resolve(k) is None:
                 errors.append(f"L4 index.md 列了不存在的頁面：{k}")
 
-    now = datetime.now().strftime("%Y-%m-%d %H:%M")
+    now = datetime.now(ZoneInfo("Asia/Taipei")).strftime("%Y-%m-%d %H:%M")
     content_pages = len([s for s in pages if s not in SPECIAL])
     out = [f"# Lint 報告（{now}）", "", f"- 內容頁數：{content_pages}",
            f"- 錯誤：{len(errors)}", f"- 提醒：{len(warns)}", ""]
